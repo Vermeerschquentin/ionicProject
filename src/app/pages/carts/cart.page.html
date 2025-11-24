@@ -1,0 +1,246 @@
+<!-- ============================================ -->
+<!-- pages/cart/cart.page.html -->
+<!-- ============================================ -->
+<app-header title="Mon Panier" [showBack]="true"></app-header>
+
+<ion-content>
+  @if (cart.length === 0) {
+    <div class="empty-cart">
+      <ion-icon name="cart-outline" class="empty-icon"></ion-icon>
+      <h3>Votre panier est vide</h3>
+      <p>Ajoutez des produits pour commencer</p>
+      <ion-button (click)="goToProducts()" expand="block" shape="round">
+        Découvrir nos produits
+      </ion-button>
+    </div>
+  } @else {
+    <div class="cart-container">
+      <!-- Cart Items -->
+      @for (item of cart; track item.id) {
+        <ion-card class="cart-item">
+          <ion-card-content>
+            <div class="item-header">
+              <h3>{{ item.nom }}</h3>
+              <ion-button 
+                fill="clear" 
+                color="danger" 
+                (click)="removeItem(item.id)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </div>
+            
+            <div class="item-controls">
+              <div class="quantity-controls">
+                <ion-button 
+                  fill="solid" 
+                  color="light" 
+                  size="small"
+                  (click)="decrementQuantity(item.id)">
+                  <ion-icon name="remove"></ion-icon>
+                </ion-button>
+                <span class="quantity">{{ item.quantite }}</span>
+                <ion-button 
+                  fill="solid" 
+                  color="primary" 
+                  size="small"
+                  (click)="incrementQuantity(item.id)">
+                  <ion-icon name="add"></ion-icon>
+                </ion-button>
+              </div>
+              
+              <div class="item-prices">
+                <p class="unit-price">{{ getItemPrice(item) | formatPrice }} × {{ item.quantite }}</p>
+                <p class="total-price">{{ getItemPrice(item) * item.quantite | formatPrice }}</p>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      }
+
+      <!-- Delivery Point Selection -->
+      <ion-card class="delivery-card" button (click)="openRestaurantModal()">
+        <ion-card-content>
+          <div class="delivery-content">
+            <div class="delivery-info">
+              <p class="delivery-label">Point de livraison</p>
+              <p class="delivery-name">{{ selectedRestaurant?.nom || 'Sélectionner' }}</p>
+              @if (selectedRestaurant) {
+                <p class="delivery-date">📅 {{ deliveryDate }}</p>
+              }
+            </div>
+            <ion-icon name="chevron-forward"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Total Section -->
+      <ion-card class="total-card">
+        <ion-card-content>
+          <div class="total-section">
+            <span class="total-label">Total</span>
+            <span class="total-amount">{{ total | formatPrice }}</span>
+          </div>
+          <ion-button 
+            expand="block" 
+            size="large"
+            [disabled]="!selectedRestaurant"
+            (click)="openConfirmModal()">
+            {{ selectedRestaurant ? 'Valider la commande' : 'Sélectionnez un point de livraison' }}
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  }
+</ion-content>
+
+<!-- Restaurant Selection Modal -->
+<ion-modal 
+  [isOpen]="isRestaurantModalOpen" 
+  (didDismiss)="closeRestaurantModal()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Choisir un point de livraison</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeRestaurantModal()">Fermer</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        @for (resto of restaurants; track resto.id) {
+          <ion-card 
+            [class.selected]="selectedRestaurant?.id === resto.id"
+            (click)="selectRestaurant(resto)"
+            button>
+            <ion-card-content>
+              <h4>{{ resto.nom }}</h4>
+              <p class="restaurant-address">{{ resto.adresse }}</p>
+              <p class="restaurant-hours">{{ resto.horaires }}</p>
+            </ion-card-content>
+          </ion-card>
+        }
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Order Confirmation Modal -->
+<ion-modal 
+  [isOpen]="isConfirmModalOpen" 
+  (didDismiss)="closeConfirmModal()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Confirmer la commande</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="confirm-details">
+        <p>Montant total: <strong>{{ total | formatPrice }}</strong></p>
+        <p>Point de retrait: <strong>{{ selectedRestaurant?.nom }}</strong></p>
+        <p>Date de livraison: <strong>{{ deliveryDate }}</strong></p>
+      </div>
+      
+      <ion-button 
+        expand="block" 
+        color="success" 
+        (click)="confirmOrder()">
+        Confirmer
+      </ion-button>
+      
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        (click)="closeConfirmModal()">
+        Annuler
+      </ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<app-bottom-nav></app-bottom-nav>
+
+<!-- ============================================ -->
+<!-- pages/manager/manager.page.ts -->
+<!-- ============================================ -->
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IonContent, IonCard, IonCardContent, IonIcon } from '@ionic/angular/standalone';
+import { HeaderComponent } from '../../components/header/header.component';
+import { BottomNavComponent } from '../../components/bottom-nav/bottom-nav.component';
+import { DataService } from '../../services/data.service';
+import { Gerant } from '../../models/interfaces';
+import { addIcons } from 'ionicons/icons';
+import { call, mail } from 'ionicons/icons';
+
+@Component({
+  selector: 'app-manager',
+  standalone: true,
+  imports: [
+    CommonModule,
+    IonContent,
+    IonCard,
+    IonCardContent,
+    IonIcon,
+    HeaderComponent,
+    BottomNavComponent
+  ],
+  templateUrl: './manager.page.html',
+  styleUrls: ['./manager.page.scss']
+})
+export class ManagerPage implements OnInit {
+  gerant: Gerant | null = null;
+
+  constructor(private dataService: DataService) {
+    addIcons({ call, mail });
+  }
+
+  ngOnInit(): void {
+    this.gerant = this.dataService.getGerant();
+  }
+}
+
+<!-- ============================================ -->
+<!-- pages/manager/manager.page.html -->
+<!-- ============================================ -->
+<app-header title="Le Gérant" [showBack]="true"></app-header>
+
+<ion-content>
+  @if (gerant) {
+    <div class="manager-container">
+      <ion-card class="manager-hero">
+        <ion-card-content>
+          <div class="manager-avatar">👨‍✈️</div>
+          <h2>{{ gerant.nom }}</h2>
+          <p class="manager-title">Pêcheur Artisan</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="contact-card">
+        <ion-card-content>
+          <h3>Coordonnées</h3>
+          <div class="contact-links">
+            <a [href]="'tel:' + gerant.telephone" class="contact-link">
+              <ion-icon name="call"></ion-icon>
+              <span>{{ gerant.telephone }}</span>
+            </a>
+            <a [href]="'mailto:' + gerant.email" class="contact-link">
+              <ion-icon name="mail"></ion-icon>
+              <span>{{ gerant.email }}</span>
+            </a>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="about-card">
+        <ion-card-content>
+          <h3>À propos</h3>
+          <p>{{ gerant.description }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  }
+</ion-content>
+
+<app-bottom-nav></app-bottom-nav>

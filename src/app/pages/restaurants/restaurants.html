@@ -1,0 +1,28 @@
+
+<app-header title="Restaurants Partenaires" [showBack]="true"></app-header>
+
+<ion-content>
+  <div class="page-header">
+    <h2>Points de Livraison</h2>
+    <p>Retirez votre commande</p>
+  </div>
+
+  <div class="content-container">
+    @for (resto of restaurants; track resto.id) {
+      <ion-card class="restaurant-card">
+        <ion-card-content>
+          <div class="restaurant-content">
+            <div class="restaurant-icon">{{ resto.icon }}</div>
+            <div class="restaurant-info">
+              <h3>{{ resto.nom }}</h3>
+              <p class="address">📍 {{ resto.adresse }}</p>
+              <p class="hours">🕐 {{ resto.horaires }}</p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    }
+  </div>
+</ion-content>
+
+<app-bottom-nav></app-bottom-nav>

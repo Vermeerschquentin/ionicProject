@@ -1,0 +1,73 @@
+.manager-container {
+  padding: 1rem;
+  padding-bottom: 5rem;
+
+  .manager-hero {
+    background: linear-gradient(to bottom right, var(--ion-color-primary), var(--ion-color-secondary));
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+
+    .manager-avatar {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .manager-title {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  .contact-card,
+  .about-card {
+    margin-bottom: 1rem;
+
+    h3 {
+      font-weight: bold;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #6b7280;
+      line-height: 1.6;
+    }
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--ion-color-primary);
+      text-decoration: none;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      background-color: #f0f9ff;
+      transition: all 0.2s;
+
+      &:active {
+        transform: scale(0.98);
+        background-color: #dbeafe;
+      }
+
+      ion-icon {
+        font-size: 1.25rem;
+      }
+
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+}

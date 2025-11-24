@@ -1,0 +1,413 @@
+// ============================================
+// 9. pages/cart/cart.page.scss
+// ============================================
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  min-height: 60vh;
+
+  .empty-icon {
+    font-size: 5rem;
+    color: #d1d5db;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #9ca3af;
+    margin-bottom: 1.5rem;
+  }
+
+  ion-button {
+    max-width: 300px;
+  }
+}
+
+.cart-container {
+  padding: 1rem;
+  padding-bottom: 5rem;
+
+  .cart-item {
+    margin-bottom: 1rem;
+    
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      h3 {
+        font-weight: bold;
+        color: #1f2937;
+        margin: 0;
+      }
+
+      ion-button {
+        margin: 0;
+      }
+    }
+
+    .item-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        .quantity {
+          font-weight: 600;
+          font-size: 1rem;
+          min-width: 1.5rem;
+          text-align: center;
+        }
+
+        ion-button {
+          --padding-start: 0.5rem;
+          --padding-end: 0.5rem;
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+
+      .item-prices {
+        text-align: right;
+
+        .unit-price {
+          font-size: 0.875rem;
+          color: #6b7280;
+          margin: 0 0 0.25rem 0;
+        }
+
+        .total-price {
+          font-weight: bold;
+          color: var(--ion-color-primary);
+          font-size: 1.125rem;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .delivery-card {
+    margin-bottom: 1rem;
+    
+    .delivery-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .delivery-info {
+        flex: 1;
+
+        .delivery-label {
+          font-size: 0.875rem;
+          color: #6b7280;
+          margin: 0 0 0.25rem 0;
+        }
+
+        .delivery-name {
+          font-weight: 600;
+          color: #1f2937;
+          margin: 0 0 0.25rem 0;
+        }
+
+        .delivery-date {
+          font-size: 0.875rem;
+          color: #6b7280;
+          margin: 0;
+        }
+      }
+
+      ion-icon {
+        color: #9ca3af;
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  .total-card {
+    background: linear-gradient(to bottom right, var(--ion-color-primary), var(--ion-color-secondary));
+    color: white;
+
+    .total-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .total-label {
+        font-size: 1.125rem;
+      }
+
+      .total-amount {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+    }
+
+    ion-button {
+      --background: white;
+      --color: var(--ion-color-primary);
+      font-weight: bold;
+      font-size: 1rem;
+
+      &[disabled] {
+        --background: rgba(255, 255, 255, 0.5);
+        --color: rgba(8, 145, 178, 0.5);
+      }
+    }
+  }
+}
+
+// Modal Styles
+ion-modal {
+  .restaurant-address {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+  }
+
+  .restaurant-hours {
+    font-size: 0.875rem;
+    color: var(--ion-color-primary);
+    margin-top: 0.25rem;
+  }
+
+  ion-card.selected {
+    border: 2px solid var(--ion-color-primary);
+    background-color: #dbeafe;
+  }
+
+  .confirm-details {
+    margin: 2rem 0;
+    
+    p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #4b5563;
+
+      strong {
+        color: #1f2937;
+      }
+    }
+  }
+}
+
+// ============================================
+// 10. pages/manager/manager.page.scss
+// ============================================
+.manager-container {
+  padding: 1rem;
+  padding-bottom: 5rem;
+
+  .manager-hero {
+    background: linear-gradient(to bottom right, var(--ion-color-primary), var(--ion-color-secondary));
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+
+    .manager-avatar {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .manager-title {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  .contact-card,
+  .about-card {
+    margin-bottom: 1rem;
+
+    h3 {
+      font-weight: bold;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #6b7280;
+      line-height: 1.6;
+    }
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--ion-color-primary);
+      text-decoration: none;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      background-color: #f0f9ff;
+      transition: all 0.2s;
+
+      &:active {
+        transform: scale(0.98);
+        background-color: #dbeafe;
+      }
+
+      ion-icon {
+        font-size: 1.25rem;
+      }
+
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// ============================================
+// 11. app.component.ts - Composant principal
+// ============================================
+/*
+import { Component } from '@angular/core';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [IonApp, IonRouterOutlet],
+  template: `
+    <ion-app>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-app>
+  `
+})
+export class AppComponent {}
+*/
+
+// ============================================
+// 12. main.ts - Point d'entrée
+// ============================================
+/*
+import { bootstrapApplication } from '@angular/platform-browser';
+import { RouteReuseStrategy, provideRouter } from '@angular/router';
+import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
+import { routes } from './app/app.routes';
+import { AppComponent } from './app/app.component';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideIonicAngular(),
+    provideRouter(routes),
+  ],
+});
+*/
+
+// ============================================
+// 13. ionic.config.json - Configuration Ionic
+// ============================================
+/*
+{
+  "name": "bateau-thibault",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
+*/
+
+// ============================================
+// 14. angular.json - Configuration Angular (extrait)
+// ============================================
+/*
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "app": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "www",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/theme/variables.scss",
+              "src/global.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  }
+}
+*/
+
+// ============================================
+// 15. package.json - Dépendances (extrait)
+// ============================================
+/*
+{
+  "name": "bateau-thibault",
+  "version": "1.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "ionic:serve": "ionic serve"
+  },
+  "dependencies": {
+    "@angular/common": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "@angular/platform-browser": "^17.0.0",
+    "@angular/platform-browser-dynamic": "^17.0.0",
+    "@angular/router": "^17.0.0",
+    "@ionic/angular": "^7.6.0",
+    "ionicons": "^7.2.0",
+    "rxjs": "^7.8.1",
+    "tslib": "^2.6.2",
+    "zone.js": "^0.14.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.0.0",
+    "@angular/cli": "^17.0.0",
+    "@angular/compiler": "^17.0.0",
+    "@angular/compiler-cli": "^17.0.0",
+    "@ionic/angular-toolkit": "^10.0.0",
+    "typescript": "~5.2.2"
+  }
+}
+*/

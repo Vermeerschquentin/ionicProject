@@ -1,0 +1,121 @@
+.hero-section {
+  position: relative;
+  height: 280px;
+  background: linear-gradient(to bottom, 
+    rgba(34, 211, 238, 0.3), 
+    rgba(59, 130, 246, 0.4), 
+    rgba(37, 99, 235, 0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  .hero-content {
+    text-align: center;
+    padding: 0 1.5rem;
+    z-index: 1;
+
+    .hero-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-family: Georgia, serif;
+      color: white;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      font-style: italic;
+    }
+
+    .hero-text {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.875rem;
+      margin: 0.25rem 0;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+    }
+
+    .hero-contact {
+      color: white;
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+    }
+  }
+
+  .wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    width: 100%;
+  }
+}
+
+.menu-container {
+  padding: 1.5rem 1rem 5rem;
+  background: linear-gradient(to bottom, #f0f9ff, white);
+
+  ion-card {
+    margin-bottom: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+
+    &.highlight {
+      box-shadow: 0 0 0 2px #fbbf24, 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    ion-card-content {
+      padding: 1.5rem;
+      border-radius: 1rem;
+      color: white;
+
+      .menu-card-content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .icon-wrapper {
+          flex-shrink: 0;
+          padding: 0.75rem;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 0.75rem;
+          backdrop-filter: blur(4px);
+
+          .menu-icon {
+            font-size: 2rem;
+          }
+        }
+
+        .text-content {
+          flex: 1;
+          text-align: left;
+
+          h2 {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin: 0 0 0.25rem 0;
+          }
+
+          p {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin: 0;
+          }
+        }
+
+        ion-icon {
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}

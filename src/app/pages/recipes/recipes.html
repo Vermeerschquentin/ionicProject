@@ -1,0 +1,30 @@
+
+<app-header title="Idées de Recettes" [showBack]="true"></app-header>
+
+<ion-content>
+  <div class="page-header">
+    <h2>Inspirez-vous</h2>
+    <p>Recettes de la mer</p>
+  </div>
+
+  <div class="content-container">
+    @for (recette of recettes; track recette.id) {
+      <ion-card class="recipe-card">
+        <ion-card-content>
+          <div class="recipe-content">
+            <div class="recipe-icon">{{ recette.icon }}</div>
+            <div class="recipe-info">
+              <h3>{{ recette.nom }}</h3>
+              <div class="recipe-details">
+                <span>⏱️ {{ recette.temps }}</span>
+                <span>📊 {{ recette.difficulte }}</span>
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    }
+  </div>
+</ion-content>
+
+<app-bottom-nav></app-bottom-nav>
