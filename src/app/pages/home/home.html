@@ -1,0 +1,41 @@
+
+<app-header title="Bateau Thibault"></app-header>
+
+<ion-content>
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-icon">🐟</div>
+      <h2 class="hero-title">Le bateau de Thibault</h2>
+      <p class="hero-text">Vente en direct de notre bateau</p>
+      <p class="hero-text">Produits selon la saison, Livraisons à Paris</p>
+      <p class="hero-contact">06.65.99.90.78</p>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path fill="#f0f9ff" d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,58.7C960,64,1056,64,1152,58.7C1248,53,1344,43,1392,37.3L1440,32L1440,120L0,120Z" />
+    </svg>
+  </div>
+
+  <div class="menu-container">
+    @for (item of menuItems; track item.route) {
+      <ion-card 
+        (click)="navigateTo(item.route)" 
+        [class.highlight]="item.highlight"
+        button>
+        <ion-card-content [class]="'gradient-' + item.gradient">
+          <div class="menu-card-content">
+            <div class="icon-wrapper">
+              <ion-icon [name]="item.icon" class="menu-icon"></ion-icon>
+            </div>
+            <div class="text-content">
+              <h2>{{ item.title }}</h2>
+              <p>{{ item.desc }}</p>
+            </div>
+            <ion-icon name="chevron-forward"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    }
+  </div>
+</ion-content>
+
+<app-bottom-nav></app-bottom-nav>

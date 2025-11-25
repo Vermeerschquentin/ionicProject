@@ -1,0 +1,29 @@
+
+
+<app-header title="Nos Bateaux" [showBack]="true"></app-header>
+
+<ion-content>
+  <div class="page-header">
+    <h2>Nos Pêcheurs</h2>
+    <p>Flotte artisanale normande</p>
+  </div>
+
+  <div class="content-container">
+    @for (bateau of bateaux; track bateau.id) {
+      <ion-card class="bateau-card">
+        <ion-card-content>
+          <div class="bateau-content">
+            <div class="bateau-icon">{{ bateau.icon }}</div>
+            <div class="bateau-info">
+              <h3>{{ bateau.nom }}</h3>
+              <p class="capitaine">Capitaine {{ bateau.capitaine }}</p>
+              <p class="specialite">Spécialité: {{ bateau.specialite }}</p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    }
+  </div>
+</ion-content>
+
+<app-bottom-nav></app-bottom-nav>

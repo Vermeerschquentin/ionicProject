@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonContent, IonCard, IonCardContent } from '@ionic/angular/standalone';
-import { HeaderComponent } from '../../components/header/header.component';
-import { BottomNavComponent } from '../../components/bottom-nav/bottom-nav.component';
+import { HeaderComponent } from '../../../components/header/header.component';
+import { BottomNavComponent } from '../../../components/bottom-nav/bottom-nav.component';
 import { DataService } from '../../../services/data.service';
 import { Recette } from '../../../models/interfaces';
 
